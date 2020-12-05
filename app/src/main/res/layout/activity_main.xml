@@ -24,7 +24,7 @@
             app:tabMode="fixed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/dblue"
+            app:tabTextColor="@color/niceOrange"
             android:background="@color/white">
 
         </com.google.android.material.tabs.TabLayout>

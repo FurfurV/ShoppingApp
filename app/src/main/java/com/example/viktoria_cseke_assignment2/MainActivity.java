@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -18,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private DairyFragment dairyFragment;
     private ProduceFragment produceFragment;
     private MeatFragment meatFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),0);
 
-        viewPagerAdapter.addFragment(breadFragment,"Bread");
+        viewPagerAdapter.addFragment(breadFragment,"Bakery");
         viewPagerAdapter.addFragment(dairyFragment,"Dairy");
         viewPagerAdapter.addFragment(produceFragment,"Produce");
         viewPagerAdapter.addFragment(meatFragment,"Meat");
@@ -50,5 +50,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_milk);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_carrot);
         tabLayout.getTabAt(3).setIcon(R.drawable.ic_meat);
+
     }
 }
