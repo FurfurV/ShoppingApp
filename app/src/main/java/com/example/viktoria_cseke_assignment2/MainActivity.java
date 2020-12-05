@@ -39,10 +39,16 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),0);
+
         viewPagerAdapter.addFragment(breadFragment,"Bread");
         viewPagerAdapter.addFragment(dairyFragment,"Dairy");
         viewPagerAdapter.addFragment(produceFragment,"Produce");
         viewPagerAdapter.addFragment(meatFragment,"Meat");
         viewPager.setAdapter(viewPagerAdapter);
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_bread);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_milk);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_carrot);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_meat);
     }
 }
