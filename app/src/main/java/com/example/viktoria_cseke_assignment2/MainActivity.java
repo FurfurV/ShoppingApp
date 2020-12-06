@@ -1,9 +1,16 @@
 package com.example.viktoria_cseke_assignment2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -52,4 +59,39 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(3).setIcon(R.drawable.ic_meat);
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+//        if (id== R.id.actionsignin){
+//
+//            Toast.makeText(this,"Sign in", Toast.LENGTH_SHORT).show();
+//        }else if(id== R.id.actionopencart){
+//            Toast.makeText(this,"cart", Toast.LENGTH_SHORT).show();
+//        }else {
+//            Toast.makeText(this,"home", Toast.LENGTH_SHORT).show();
+//        }
+//        return super.onOptionsItemSelected(item);
+
+        switch (item.getItemId()) {
+            case R.id.actionsignin:
+                startActivity(new Intent(this, Login.class));
+                return true;
+
+            case R.id.actionopencart:
+                Toast.makeText(this,"cart", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(this, Help.class));
+                return true;
+
+            case R.id.actiongohome:
+                Toast.makeText(this,"home", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(this, Help.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+
 }

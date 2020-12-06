@@ -37,6 +37,7 @@
                 android:gravity="center"
                 android:text="TextViewName"
                 android:textSize="22dp"
+                android:textColor="@color/niceOrange"
                 android:textStyle="bold" />
 
             <TextView
@@ -45,6 +46,7 @@
                 android:layout_height="63dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:textSize="18dp"
                 android:text="Price $$$" />
 
@@ -70,7 +72,7 @@
                 <Button
                     android:id="@+id/button"
                     android:layout_width="match_parent"
-                    android:layout_height="81dp"
+                    android:layout_height="89dp"
                     android:layout_gravity="left|center_vertical"
                     android:layout_weight="1"
                     android:backgroundTint="@color/niceOrange"
@@ -82,7 +84,7 @@
                 <View
                     android:id="@+id/divider3"
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    android:layout_height="12dp"
                     android:layout_weight="1"
                     android:background="#FFFFFF" />
 
@@ -91,6 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:gravity="center_horizontal"
+                    android:textColor="#989797"
                     android:text="code" />
             </LinearLayout>
         </LinearLayout>

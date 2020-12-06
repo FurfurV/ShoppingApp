@@ -16,15 +16,17 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/white"
-            android:background="@color/black" />
+            android:background="@color/black"
+            android:theme="@style/Theme.Viktoria_Cseke_Assignment2" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             app:tabMode="fixed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/niceOrange"
+            app:tabIndicatorHeight="7dp"
+            app:tabIndicatorColor="@color/niceOrange"
+            app:tabTextColor="@color/black"
             android:background="@color/white">
 
         </com.google.android.material.tabs.TabLayout>
