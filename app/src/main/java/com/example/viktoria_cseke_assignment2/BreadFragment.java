@@ -10,40 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class BreadFragment extends Fragment {
     private RecyclerView myRecycleV;
+    private List<FoodItem> foodlist;
     View v;
-
-    String name[]={"Artisan bread","Olive bread","Tiger bread"};
-    String code[]={"b000","b001","b002"};
-    Double price[]={1.70,2.00,1.90};
-    int images[]={R.drawable.bread,R.drawable.olive_bread,R.drawable.tiger_bread_roll};
-
-
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-
-
-//    private String mParam1;
-//    private String mParam2;
 
     public BreadFragment() {
         // Required empty public constructor
     }
-
-//    recyclerViewBread = findViewById(R.id.breadRecycle);
-//    MyRecycleViewAdapter myRecycleViewAdapter = new MyRecycleViewAdapter(this,name,code,price,images);
-
-//    public static BreadFragment newInstance(String param1, String param2) {
-//        BreadFragment fragment = new BreadFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,9 +33,18 @@ public class BreadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        foodlist = new ArrayList<>();
+        foodlist.add(new FoodItem("Artisan bread","b000",1.70,R.drawable.bread));
+        foodlist.add(new FoodItem("Olive bread","b001",2.00,R.drawable.olive_bread));
+        foodlist.add(new FoodItem("Tiger bread rolls","b002",1.90,R.drawable.tiger_bread_roll));
+        foodlist.add(new FoodItem("Pain au chocolat","b003",0.80,R.drawable.painauchoco));
+        foodlist.add(new FoodItem("Chocolate chip cookie","b004",0.60,R.drawable.cookies));
+        foodlist.add(new FoodItem("Tomato focaccia","b005",2.60,R.drawable.tomatofocaccia));
+
+
         v= inflater.inflate(R.layout.fragment_bread, container, false);
         myRecycleV = (RecyclerView) v.findViewById(R.id.breadRecycle);
-        MyRecycleViewAdapter myRecycleViewAdapter = new MyRecycleViewAdapter(getContext(), name,code,price,images);
+        MyRecycleViewAdapter myRecycleViewAdapter = new MyRecycleViewAdapter(getContext(), foodlist);
         myRecycleV.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecycleV.setAdapter(myRecycleViewAdapter);
 

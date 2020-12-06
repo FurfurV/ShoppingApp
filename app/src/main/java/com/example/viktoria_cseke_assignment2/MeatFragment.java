@@ -3,62 +3,51 @@ package com.example.viktoria_cseke_assignment2;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MeatFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class MeatFragment extends Fragment {
+    private RecyclerView myRecycleV;
+    private List<FoodItem> foodlist;
+    View v;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public MeatFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MeatFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MeatFragment newInstance(String param1, String param2) {
-        MeatFragment fragment = new MeatFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_meat, container, false);
+
+        foodlist = new ArrayList<>();
+        foodlist.add(new FoodItem("Streaky bacon","m000",2.40,R.drawable.bacon));
+        foodlist.add(new FoodItem("Chicken nuggets","m001",2.65,R.drawable.chickennuggets));
+        foodlist.add(new FoodItem("T-bone steak","m002",10.50,R.drawable.tbonesteak));
+        foodlist.add(new FoodItem("Italian sausage","m003",4.30,R.drawable.italiansausage));
+        foodlist.add(new FoodItem("Organic beef ribs","m004",12.00,R.drawable.beefrib));
+        foodlist.add(new FoodItem("Chilli chicken wings","m005",3.20,R.drawable.chilliwings));
+
+        v=inflater.inflate(R.layout.fragment_meat, container, false);
+        myRecycleV = (RecyclerView) v.findViewById(R.id.meatRecycle);
+        MyRecycleViewAdapter myRecycleViewAdapter = new MyRecycleViewAdapter(getContext(), foodlist);
+        myRecycleV.setLayoutManager(new LinearLayoutManager(getActivity()));
+        myRecycleV.setAdapter(myRecycleViewAdapter);
+
+        return v;
     }
 }
