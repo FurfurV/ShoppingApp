@@ -1,47 +1,55 @@
 package com.example.viktoria_cseke_assignment2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
-    EditText username, password;
-    Button signin, signupnxt;
+    private Toolbar toolbar;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username =(EditText) findViewById(R.id.username);
-        password =(EditText) findViewById(R.id.password);
-        signin = (Button) findViewById(R.id.signin);
-        signupnxt = (Button) findViewById(R.id.signupnextpg);
+        LoginFragment loginFragment = new LoginFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.animator.slideup,0,R.animator.slideup,0 );
+        fragmentTransaction.add(R.id.mymainframe, loginFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
+        toolbar = findViewById(R.id.toolbarlogin);
+        setSupportActionBar(toolbar);
 
-        signin.setOnClickListener(new View.OnClickListener() {
+        FragmentManager fm = getSupportFragmentManager();
+        fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
-            public void onClick(View v) {
-                String uname = username.getText().toString()+"\n";
-                String passw = password.getText().toString();
-
-                DbHandler dbHandler = new DbHandler(Login.this);
-                dbHandler.GetUserByUsername(uname);
+            public void onBackStackChanged() {
+                if(getSupportFragmentManager().getBackStackEntryCount() == 0) finish();
             }
         });
 
-        signupnxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Login.this, SignUpActivity.class));
-
-            }
-        });
     }
 }
