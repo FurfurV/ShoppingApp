@@ -35,6 +35,14 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
         holder.name.setText(items.get(position).getName());
         holder.code.setText(items.get(position).getCode());
         holder.price.setText(String.format("€ %.2f", items.get(position).getPrice()));
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(">>>>>>>>>>>>>>>>>>"+items.get(position).getName());
+            }
+        });
     }
 
 

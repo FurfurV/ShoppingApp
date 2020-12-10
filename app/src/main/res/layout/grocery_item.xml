@@ -70,7 +70,7 @@
                     android:background="#FFFFFF" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/add_to_cart"
                     android:layout_width="match_parent"
                     android:layout_height="89dp"
                     android:layout_gravity="left|center_vertical"

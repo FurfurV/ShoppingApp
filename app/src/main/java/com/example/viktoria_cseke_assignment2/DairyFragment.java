@@ -47,7 +47,12 @@ public class DairyFragment extends Fragment {
 
         v= inflater.inflate(R.layout.fragment_dairy, container, false);
         myRecycleV = (RecyclerView) v.findViewById(R.id.dairyRecycle);
-        MyRecycleViewAdapter myRecycleViewAdapter = new MyRecycleViewAdapter(getContext(), foodlist);
+        MyRecycleViewAdapter myRecycleViewAdapter = new MyRecycleViewAdapter(getContext(), foodlist, new ClickListener() {
+            @Override
+            public void onPositionClicked(int position,String foodItem) {
+
+            }
+        });
         myRecycleV.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecycleV.setAdapter(myRecycleViewAdapter);
 

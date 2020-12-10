@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Basket extends AppCompatActivity {
@@ -22,8 +23,12 @@ public class Basket extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
         food= new ArrayList<>();
-        food.add(new FoodItem("Mango","p004",0.99));
-        food.add(new FoodItem("Bananas","p005",1.10));
+        DbHandler dbHandler=new DbHandler(this);
+        ArrayList<HashMap<String, String>> getCart = dbHandler.GetCart();
+        System.out.println(getCart.size());
+
+//        food.add(new FoodItem("Mango","p004",0.99));
+//        food.add(new FoodItem("Bananas","p005",1.10));
 
         recyclerView = (RecyclerView) findViewById(R.id.basketRecycle);
 //        BasketItemAdapter basketItemAdapter = new BasketItemAdapter(food,this);
