@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,15 +75,15 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
     *   Creating new user
     */
-    void InsertUserDetails(String id, String username, String password, String address){
+    void InsertUserDetails(String username, String password, String address){
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
-         ContentValues cValues = new ContentValues();
-         cValues.put(KEY_ID, id);
-         cValues.put(KEY_USERNAME, username);
-         cValues.put(KEY_PASSWORD, password);
+        ContentValues cValues = new ContentValues();
+        cValues.put(KEY_USERNAME, username);
+        cValues.put(KEY_PASSWORD, password);
         cValues.put(KEY_ADDRESS, address);
-         // Insert the new row, returning the primary key value of the new row
+
+        // Insert the new row, returning the primary key value of the new row
          long newRowId = db.insert(TABLE_USERS,null, cValues);
 
          db.close();
@@ -111,7 +112,7 @@ public class DbHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> userList = new ArrayList<>();
 
-        String query = "SELECT id, username, password, address FROM " + TABLE_USERS;
+        String query = "SELECT * FROM " + TABLE_USERS;
 
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {

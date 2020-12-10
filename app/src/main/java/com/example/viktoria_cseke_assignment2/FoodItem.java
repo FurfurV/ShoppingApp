@@ -10,6 +10,12 @@ public class FoodItem {
 
     }
 
+    public FoodItem(String name, String code, Double price) {
+        this.name = name;
+        this.code = code;
+        this.price = price;
+    }
+
     public FoodItem(String name, String code, Double price, int image) {
         this.name = name;
         this.code = code;

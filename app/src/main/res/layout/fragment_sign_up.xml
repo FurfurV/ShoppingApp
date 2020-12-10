@@ -71,7 +71,7 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/myedittext"
             android:hint="Address"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/niceOrange" />
@@ -83,7 +83,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:background="@color/niceOrange"
+            android:background="@drawable/roundedbutton"
             android:padding="15dp"
             android:text="Sign up" />
 

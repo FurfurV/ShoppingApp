@@ -79,13 +79,13 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.actionopencart:
-                Toast.makeText(this,"cart", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(this, Help.class));
+//                Toast.makeText(this,"cart", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, Basket.class));
                 return true;
 
             case R.id.actiongohome:
-                Toast.makeText(this,"home", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(this, Help.class));
+//                Toast.makeText(this,"home", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MainActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

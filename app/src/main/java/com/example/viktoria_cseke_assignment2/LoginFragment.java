@@ -1,5 +1,6 @@
 package com.example.viktoria_cseke_assignment2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +63,6 @@ public class LoginFragment extends Fragment {
                 SignUpFragment signUpFragment = new SignUpFragment();
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.setCustomAnimations(R.animator.slideup,0,R.animator.slideup,0 );
-                fragmentTransaction.addToBackStack(null);
 
                 fragmentTransaction.replace(R.id.mymainframe, signUpFragment);
                 fragmentTransaction.addToBackStack(null);
@@ -70,11 +74,39 @@ public class LoginFragment extends Fragment {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uname = username.getText().toString()+"\n";
+                String uname = username.getText().toString();
                 String passw = password.getText().toString();
 
                 DbHandler dbHandler = new DbHandler(getContext());
-                dbHandler.GetUserByUsername(uname);
+                ArrayList<HashMap<String, String>> getuser =dbHandler.GetUserByUsername(uname);
+
+
+                System.out.println(getuser.size());
+                if(getuser.size()>0){
+                    String dbUser = getuser.get(0).get("username").toString();
+                    String dbPass = getuser.get(0).get("password").toString();
+                    System.out.println(dbUser);
+                    System.out.println(dbPass);
+                    System.out.println("----------");
+                    System.out.println(uname+" "+passw);
+                    System.out.println(passw.equals(dbPass));
+
+
+                    System.out.println(passw.length()+" "+dbPass.length());
+
+                    if(passw.equals(dbPass)){
+
+                        Toast.makeText(getContext(), "Signed in successfully",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getContext(), MainActivity.class));
+
+                    }else {
+                        System.out.println("no pass?");
+                        Toast.makeText(getContext(), "Wrong password for this username",Toast.LENGTH_SHORT).show();
+                    }
+
+                }else {
+                    Toast.makeText(getContext(), "User name not found.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

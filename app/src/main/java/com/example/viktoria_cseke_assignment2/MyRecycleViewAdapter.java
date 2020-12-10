@@ -14,11 +14,7 @@ import java.util.List;
 
 public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.MyViewHolder> {
 
-//    String name_data[], code_data[];
-//    Double price_data[];
-//    int images_data[];
     List<FoodItem> food;
-
     Context context;
 
     public MyRecycleViewAdapter(Context ct,List<FoodItem> myfood){

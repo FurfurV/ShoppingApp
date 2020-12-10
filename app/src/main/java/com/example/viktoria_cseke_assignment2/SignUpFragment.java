@@ -7,12 +7,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpFragment extends Fragment {
     EditText username,password,passrepeat,address;
@@ -49,9 +52,26 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                String name = username.getText().toString();
+                String pass = password.getText().toString();
+                String addrss = address.getText().toString();
+
+                DbHandler dbHandler = new DbHandler(getContext());
+                dbHandler.InsertUserDetails(name, pass, addrss);
+//                intent = new Intent(MainActivity.this, DetailsActivity.class);
+//                startActivity(intent);
+                Toast.makeText(getContext(), "Sign up successful",Toast.LENGTH_SHORT).show();
+
+                ArrayList<HashMap<String, String>> userList = dbHandler.GetUsers();
+                ArrayList<HashMap<String, String>> getuser = dbHandler.GetUserByUsername(name);
+
+                LoginFragment loginFragment = new LoginFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.animator.slideup,0,R.animator.slideup,0 );
+                fragmentTransaction.replace(R.id.mymainframe, loginFragment);
+                fragmentTransaction.commit();
             }
         });
-
 
         return v;
     }
