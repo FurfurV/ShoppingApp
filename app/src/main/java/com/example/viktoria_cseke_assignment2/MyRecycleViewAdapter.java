@@ -12,20 +12,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdapter.MyViewHolder> {
-    private final ClickListener listener;
     List<FoodItem> food;
     Context context;
 
-    public MyRecycleViewAdapter(Context ct,List<FoodItem> myfood, ClickListener click){
+    public MyRecycleViewAdapter(Context ct,List<FoodItem> myfood){
         context = ct;
         food=myfood;
-        listener=click;
     }
 
 
@@ -34,7 +31,7 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
         v = LayoutInflater.from(context).inflate(R.layout.grocery_item, parent,false);
-        MyViewHolder viewHolder = new MyViewHolder(v,listener);
+        MyViewHolder viewHolder = new MyViewHolder(v);
         return viewHolder;
     }
 
@@ -74,35 +71,23 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
         return food.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView name;
         private TextView code;
         private TextView price;
         private ImageView img;
         private Button addtocart;
-        private WeakReference<ClickListener> listenerRef;
         private FoodItem foodItem=new FoodItem();
 
-        public MyViewHolder(@NonNull View itemView,ClickListener listener) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            listenerRef = new WeakReference<>(listener);
             name = (TextView) itemView.findViewById(R.id.textView_Name);
             code = (TextView) itemView.findViewById(R.id.textView_Code);
             price = (TextView) itemView.findViewById(R.id.textView_Price);
             img = (ImageView) itemView.findViewById(R.id.food_image);
             addtocart = (Button) itemView.findViewById(R.id.add_to_cart);
 
-            addtocart.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-
-            if (v.getId() == addtocart.getId()) {
-                Toast.makeText(v.getContext(), "ITEM PRESSED = " + String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-            }
-            listenerRef.get().onPositionClicked(getAdapterPosition(),foodItem.getName());
         }
     }
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,14 +37,20 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
         holder.name.setText(items.get(position).getName());
         holder.code.setText(items.get(position).getCode());
         holder.price.setText(String.format("€ %.2f", items.get(position).getPrice()));
-
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(">>>>>>>>>>>>>>>>>>"+items.get(position).getName());
+                System.out.println(">>>"+items.get(position).getName());
             }
         });
+
+
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
 
 
@@ -56,12 +64,14 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
         private TextView name;
         private TextView code;
         private TextView price;
+        private ImageButton remove;
 
         public ThisViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.basketitemname);
             code = (TextView) itemView.findViewById(R.id.basketitemcode);
             price = (TextView) itemView.findViewById(R.id.basketitemprice);
+            remove = (ImageButton) itemView.findViewById(R.id.remove);
         }
     }
 
