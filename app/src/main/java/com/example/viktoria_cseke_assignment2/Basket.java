@@ -26,14 +26,12 @@ public class Basket extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DbHandler dbHandler;
     private List<FoodItem> food;
-    private Cursor cursor;
     private BasketItemAdapter basketItemAdapter;
     private Toolbar toolbar;
     private Double totalprice;
-    Context context;
     public static TextView cost;
     private ArrayList<HashMap<String, String>> getCart;
-    private Button emptybasket;
+    private Button emptybasket, continueShopping;
     private int size;
 
     @Override
@@ -57,6 +55,7 @@ public class Basket extends AppCompatActivity {
         size = dbHandler.GetCart().size();
 
         emptybasket = (Button) findViewById(R.id.emptybasket);
+        continueShopping = (Button) findViewById(R.id.continueshop);
 
         totalprice=0.0;
 
@@ -70,7 +69,6 @@ public class Basket extends AppCompatActivity {
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.basketRecycle);
-//        BasketItemAdapter basketItemAdapter = new BasketItemAdapter(food,this);
         basketItemAdapter = new BasketItemAdapter( food,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(basketItemAdapter);
@@ -84,13 +82,18 @@ public class Basket extends AppCompatActivity {
         emptybasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Empty the basket brrrrrrrrrrrrrr >>>>>>>>>>>> ");
                 dbHandler.DeleteCart();
                 food=new ArrayList<>();
                 basketItemAdapter.notifyDataSetChanged();
-
                 basketItemAdapter.removeall();
                 Toast.makeText(getApplicationContext(), "Empty basket",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        continueShopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
     }
