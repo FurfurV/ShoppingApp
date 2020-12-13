@@ -78,6 +78,8 @@ public class Basket extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarbasket);
         setSupportActionBar(toolbar);
         cost.setText(String.format("€ %.2f",basketItemAdapter.updatePrice()));
+        basketItemAdapter.notifyDataSetChanged();
+        basketItemAdapter.notifyItemRangeChanged(0,getCart.size());
 
         emptybasket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,9 +87,10 @@ public class Basket extends AppCompatActivity {
                 System.out.println("Empty the basket brrrrrrrrrrrrrr >>>>>>>>>>>> ");
                 dbHandler.DeleteCart();
                 food=new ArrayList<>();
-                basketItemAdapter.removeall();
-                totalprice=0.0;
+                basketItemAdapter.notifyDataSetChanged();
 
+                basketItemAdapter.removeall();
+                Toast.makeText(getApplicationContext(), "Empty basket",Toast.LENGTH_SHORT).show();
             }
         });
     }

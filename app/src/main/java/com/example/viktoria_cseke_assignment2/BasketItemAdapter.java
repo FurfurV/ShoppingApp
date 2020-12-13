@@ -48,7 +48,6 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
             public void onClick(View v) {
 
                 System.out.println(">>>"+items.get(position).getName());
-
                 DbHandler dbHandler = new DbHandler(context);
                 dbHandler.DeleteCartItem(items.get(position).getCode());
                 System.out.println("removed");
@@ -68,6 +67,7 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
     public void removeall(){
         items.clear();
         System.out.println("removed all");
+        Basket.cost.setText(String.format("€ %.2f",0.0));
     }
 
     public double updatePrice(){
