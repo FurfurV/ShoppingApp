@@ -48,16 +48,36 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
             public void onClick(View v) {
 
                 System.out.println(">>>"+items.get(position).getName());
+
                 DbHandler dbHandler = new DbHandler(context);
                 dbHandler.DeleteCartItem(items.get(position).getCode());
                 System.out.println("removed");
-                notifyItemRemoved(position);
                 items.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(0,getItemCount());
+
+                System.out.println("Updated positions" +getItemCount());
+                Basket.cost.setText(String.format("€ %.2f",updatePrice()));
+
+                updatePrice();
 
             }
         });
     }
 
+    public void removeall(){
+        items.clear();
+        System.out.println("removed all");
+    }
+
+    public double updatePrice(){
+        double newPrice=0;
+        for (int i =0; i<getItemCount();i++){
+            System.out.println(items.get(i).getPrice()+"prices <<<<<<<<<<<<<");
+            newPrice=newPrice+items.get(i).getPrice();
+        }
+        return newPrice;
+    }
 
     @Override
     public int getItemCount() {
@@ -77,6 +97,8 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
             code = (TextView) itemView.findViewById(R.id.basketitemcode);
             price = (TextView) itemView.findViewById(R.id.basketitemprice);
             remove = (ImageButton) itemView.findViewById(R.id.remove);
+
         }
+
     }
 }

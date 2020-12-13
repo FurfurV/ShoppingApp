@@ -190,9 +190,9 @@ public class DbHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void DeleteCart(String itemcode) {
+    public void DeleteCart() {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_CART);
+        db.delete(TABLE_CART,null,null);
         db.close();
     }
 

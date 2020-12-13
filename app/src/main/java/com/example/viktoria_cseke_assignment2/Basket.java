@@ -6,13 +6,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,8 +30,10 @@ public class Basket extends AppCompatActivity {
     private BasketItemAdapter basketItemAdapter;
     private Toolbar toolbar;
     private Double totalprice;
-    private TextView cost;
+    Context context;
+    public static TextView cost;
     private ArrayList<HashMap<String, String>> getCart;
+    private Button emptybasket;
     private int size;
 
     @Override
@@ -48,10 +54,9 @@ public class Basket extends AppCompatActivity {
         dbHandler=new DbHandler(this);
         getCart = new ArrayList<>();
         getCart.addAll(dbHandler.GetCart());
-//        getCart.addAll(dbHandler.GetCart());
-        System.out.println(getCart);
         size = dbHandler.GetCart().size();
-        System.out.println(getCart.size());
+
+        emptybasket = (Button) findViewById(R.id.emptybasket);
 
         totalprice=0.0;
 
@@ -72,12 +77,19 @@ public class Basket extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbarbasket);
         setSupportActionBar(toolbar);
-        cost.setText(String.format("€ %.2f",totalprice));
-        basketItemAdapter.notifyDataSetChanged();
-        basketItemAdapter.notifyItemRangeChanged(0,getCart.size());
+        cost.setText(String.format("€ %.2f",basketItemAdapter.updatePrice()));
 
-//        recyclerView.setAdapter(new BasketItemAdapter(food,this));
-//        recyclerView.invalidate();
+        emptybasket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Empty the basket brrrrrrrrrrrrrr >>>>>>>>>>>> ");
+                dbHandler.DeleteCart();
+                food=new ArrayList<>();
+                basketItemAdapter.removeall();
+                totalprice=0.0;
+
+            }
+        });
     }
 
     @Override
