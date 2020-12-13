@@ -1,6 +1,7 @@
 package com.example.viktoria_cseke_assignment2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.ThisViewHolder> {
-
     List<FoodItem> items;
     Context context;
+    private DbHandler dbHandler;
+
+    public BasketItemAdapter(){
+
+    }
 
     public BasketItemAdapter( List<FoodItem> item, Context ct) {
         this.items = item;
@@ -29,6 +34,7 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
         View v;
         v = LayoutInflater.from(context).inflate(R.layout.basket_item, parent,false);
         ThisViewHolder myViewHolder =  new ThisViewHolder(v);
+        dbHandler=new DbHandler(context);
         return myViewHolder;
     }
 
@@ -40,17 +46,16 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 System.out.println(">>>"+items.get(position).getName());
+                DbHandler dbHandler = new DbHandler(context);
+                dbHandler.DeleteCartItem(items.get(position).getCode());
+                System.out.println("removed");
+                notifyItemRemoved(position);
+                items.remove(position);
+
             }
         });
-
-
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
     }
 
 
@@ -74,32 +79,4 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
             remove = (ImageButton) itemView.findViewById(R.id.remove);
         }
     }
-
-//
-//    @NonNull
-//    @Override
-//    public BasketItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View v;
-//        v = LayoutInflater.from(context).inflate(R.layout.basket_item, parent,false);
-//        return new BasketItem(v);
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull BasketItem holder, int position) {
-//        holder.itemname.setText(item.get(position).getName());
-//        holder.itemcode.setText(item.get(position).getCode());
-//        holder.itemprice.setText(String.format("€ %.2f",item.get(position).getPrice()));
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return 0;
-//    }
 }

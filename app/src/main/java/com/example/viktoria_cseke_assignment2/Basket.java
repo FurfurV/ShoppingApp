@@ -27,6 +27,8 @@ public class Basket extends AppCompatActivity {
     private Toolbar toolbar;
     private Double totalprice;
     private TextView cost;
+    private ArrayList<HashMap<String, String>> getCart;
+    private int size;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -44,18 +46,22 @@ public class Basket extends AppCompatActivity {
         cost=(TextView) findViewById(R.id.cost);
         food= new ArrayList<>();
         dbHandler=new DbHandler(this);
-        ArrayList<HashMap<String, String>> getCart = dbHandler.GetCart();
+        getCart = new ArrayList<>();
+        getCart.addAll(dbHandler.GetCart());
+//        getCart.addAll(dbHandler.GetCart());
+        System.out.println(getCart);
+        size = dbHandler.GetCart().size();
         System.out.println(getCart.size());
+
         totalprice=0.0;
 
-        for(int i =0; i<getCart.size();i++){
+        for(int i =0; i<size;i++){
             Double price =Double.parseDouble(getCart.get(i).get("price"));
             String name = getCart.get(i).get("itemname").toString();
             String code = getCart.get(i).get("itemcode").toString();
             System.out.println(totalprice + price);
             totalprice= totalprice + price;
             food.add(new FoodItem(name,code,price));
-
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.basketRecycle);
@@ -67,6 +73,11 @@ public class Basket extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarbasket);
         setSupportActionBar(toolbar);
         cost.setText(String.format("€ %.2f",totalprice));
+        basketItemAdapter.notifyDataSetChanged();
+        basketItemAdapter.notifyItemRangeChanged(0,getCart.size());
+
+//        recyclerView.setAdapter(new BasketItemAdapter(food,this));
+//        recyclerView.invalidate();
     }
 
     @Override

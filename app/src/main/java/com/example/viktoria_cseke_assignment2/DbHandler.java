@@ -182,11 +182,17 @@ public class DbHandler extends SQLiteOpenHelper {
 
 
     /*
-    *delete cart details
+    *delete cart item details
      */
-    public void DeleteCart(String itemcode) {
+    public void DeleteCartItem(String itemcode) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CART, KEY_ITEMCODE + " = ?", new String[]{itemcode});
+        db.close();
+    }
+
+    public void DeleteCart(String itemcode) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_CART);
         db.close();
     }
 
