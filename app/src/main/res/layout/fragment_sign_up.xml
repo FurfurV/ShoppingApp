@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/signupfragmentframe"
-    tools:context=".SignUpFragment"
+    tools:context=".fragments.SignUpFragment"
     android:layout_gravity="bottom">
 
     <LinearLayout

@@ -3,19 +3,23 @@ package com.example.viktoria_cseke_assignment2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.ArrayAdapter;
 
-import com.example.viktoria_cseke_assignment2.fragments.LoginFragment;
-
-public class Login extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity {
     private Toolbar toolbar;
+    EditText card, year,month,cvv,name,country,address,city,email;
+    Button confirm;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -25,27 +29,30 @@ public class Login extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_payment);
 
-        LoginFragment loginFragment = new LoginFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.animator.slideup,0,R.animator.slideup,0 );
-        fragmentTransaction.add(R.id.mymainframe, loginFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-
-        toolbar = findViewById(R.id.toolbarlogin);
+        toolbar = findViewById(R.id.toolbarbasket);
         setSupportActionBar(toolbar);
 
-        FragmentManager fm = getSupportFragmentManager();
-        fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+        card =(EditText) findViewById(R.id.cardnum);
+        year =(EditText) findViewById(R.id.year);
+        cvv =(EditText) findViewById(R.id.cvv);
+        month = (EditText) findViewById(R.id.month);
+        name = (EditText) findViewById(R.id.name);
+        country = (EditText) findViewById(R.id.country);
+        address = (EditText) findViewById(R.id.address);
+        city = (EditText) findViewById(R.id.city);
+        email = (EditText) findViewById(R.id.email);
+
+        confirm  = (Button) findViewById(R.id.confirmpayment);
+
+        confirm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onBackStackChanged() {
-                if(getSupportFragmentManager().getBackStackEntryCount() == 0) finish();
+            public void onClick(View v) {
+
             }
         });
 

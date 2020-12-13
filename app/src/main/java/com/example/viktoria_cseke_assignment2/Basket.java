@@ -6,9 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.viktoria_cseke_assignment2.adapters.BasketItemAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ public class Basket extends AppCompatActivity {
     private Double totalprice;
     public static TextView cost;
     private ArrayList<HashMap<String, String>> getCart;
-    private Button emptybasket, continueShopping;
+    private Button emptybasket, continueShopping, checkout;
     private int size;
 
     @Override
@@ -56,6 +56,7 @@ public class Basket extends AppCompatActivity {
 
         emptybasket = (Button) findViewById(R.id.emptybasket);
         continueShopping = (Button) findViewById(R.id.continueshop);
+        checkout = (Button) findViewById(R.id.checkout);
 
         totalprice=0.0;
 
@@ -94,6 +95,13 @@ public class Basket extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), PaymentActivity.class));
             }
         });
     }

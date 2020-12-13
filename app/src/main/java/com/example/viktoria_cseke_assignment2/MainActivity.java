@@ -5,16 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.viktoria_cseke_assignment2.adapters.ViewPagerAdapter;
+import com.example.viktoria_cseke_assignment2.fragments.BreadFragment;
+import com.example.viktoria_cseke_assignment2.fragments.DairyFragment;
+import com.example.viktoria_cseke_assignment2.fragments.MeatFragment;
+import com.example.viktoria_cseke_assignment2.fragments.ProduceFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {

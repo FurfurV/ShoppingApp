@@ -1,8 +1,7 @@
-package com.example.viktoria_cseke_assignment2;
+package com.example.viktoria_cseke_assignment2.fragments;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -13,9 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.viktoria_cseke_assignment2.DbHandler;
+import com.example.viktoria_cseke_assignment2.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class SignUpFragment extends Fragment {
     EditText username,password,passrepeat,address;

@@ -1,4 +1,4 @@
-package com.example.viktoria_cseke_assignment2;
+package com.example.viktoria_cseke_assignment2.fragments;
 
 import android.os.Bundle;
 
@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import com.example.viktoria_cseke_assignment2.FoodItem;
+import com.example.viktoria_cseke_assignment2.R;
+import com.example.viktoria_cseke_assignment2.adapters.MyRecycleViewAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class BreadFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         foodlist = new ArrayList<>();
-        foodlist.add(new FoodItem("Artisan bread","b000",1.70,R.drawable.bread));
+        foodlist.add(new FoodItem("Artisan bread","b000",1.70, R.drawable.bread));
         foodlist.add(new FoodItem("Olive bread","b001",2.00,R.drawable.olive_bread));
         foodlist.add(new FoodItem("Tiger bread rolls","b002",1.90,R.drawable.tiger_bread_roll));
         foodlist.add(new FoodItem("Pain au chocolat","b003",0.80,R.drawable.painauchoco));

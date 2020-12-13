@@ -1,16 +1,19 @@
-package com.example.viktoria_cseke_assignment2;
+package com.example.viktoria_cseke_assignment2.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.viktoria_cseke_assignment2.Basket;
+import com.example.viktoria_cseke_assignment2.DbHandler;
+import com.example.viktoria_cseke_assignment2.FoodItem;
+import com.example.viktoria_cseke_assignment2.R;
 
 import java.util.List;
 

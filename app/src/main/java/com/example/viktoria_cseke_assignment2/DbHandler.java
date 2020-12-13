@@ -75,7 +75,7 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
     *   Creating new user
     */
-    void InsertUserDetails(String username, String password, String address){
+    public void InsertUserDetails(String username, String password, String address){
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
@@ -91,7 +91,7 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
     * create new cart
      */
-    void InsertCartDetails(String itemname, String itemcode, Double price){
+    public void InsertCartDetails(String itemname, String itemcode, Double price){
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();

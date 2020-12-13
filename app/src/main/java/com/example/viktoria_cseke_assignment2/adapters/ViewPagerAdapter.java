@@ -1,4 +1,4 @@
-package com.example.viktoria_cseke_assignment2;
+package com.example.viktoria_cseke_assignment2.adapters;
 
 import android.widget.LinearLayout;
 

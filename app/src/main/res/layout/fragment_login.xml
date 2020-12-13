@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/loginfragmentframe"
-    tools:context=".LoginFragment"
+    tools:context=".fragments.LoginFragment"
     android:layout_gravity="bottom">
 
     <ScrollView

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    tools:context=".PaymentActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarbasket"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/black"
+            android:theme="@style/Theme.Viktoria_Cseke_Assignment2" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/basketbg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Payment"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="italic|bold" />
+
+                <EditText
+                    android:id="@+id/cardnum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/myedittext"
+                    android:hint="Card Number"
+                    android:inputType="number"
+                    android:outlineSpotShadowColor="@color/black"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/niceOrange" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/month"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/myedittext"
+                        android:hint="Month"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:outlineSpotShadowColor="@color/black"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/niceOrange" />
+
+                    <EditText
+                        android:id="@+id/year"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/myedittext"
+                        android:hint="Year"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:outlineSpotShadowColor="@color/black"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/niceOrange" />
+
+
+                    <EditText
+                        android:id="@+id/cvv"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/myedittext"
+                        android:hint="CVV"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:outlineSpotShadowColor="@color/black"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/niceOrange" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/basketbg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Shipping information"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="italic|bold" />
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/myedittext"
+                    android:hint="Name"
+                    android:inputType="text"
+                    android:outlineSpotShadowColor="@color/black"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/niceOrange" />
+
+                <EditText
+                    android:id="@+id/country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/myedittext"
+                    android:hint="Country"
+                    android:inputType="text"
+                    android:outlineSpotShadowColor="@color/black"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/niceOrange" />
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/myedittext"
+                    android:hint="Address"
+                    android:inputType="text"
+                    android:outlineSpotShadowColor="@color/black"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/niceOrange" />
+
+                <EditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/myedittext"
+                    android:hint="City"
+                    android:inputType="text"
+                    android:outlineSpotShadowColor="@color/black"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/niceOrange" />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/myedittext"
+                    android:hint="Email address"
+                    android:inputType="textEmailAddress"
+                    android:outlineSpotShadowColor="@color/black"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/niceOrange" />
+
+                <Button
+                    android:id="@+id/confirmpayment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/roundedbutton"
+                    android:text="Confirm" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

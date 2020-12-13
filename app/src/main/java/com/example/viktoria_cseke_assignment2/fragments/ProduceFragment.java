@@ -1,4 +1,4 @@
-package com.example.viktoria_cseke_assignment2;
+package com.example.viktoria_cseke_assignment2.fragments;
 
 import android.os.Bundle;
 
@@ -12,6 +12,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.viktoria_cseke_assignment2.FoodItem;
+import com.example.viktoria_cseke_assignment2.R;
+import com.example.viktoria_cseke_assignment2.adapters.MyRecycleViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +41,7 @@ public class ProduceFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         foodlist = new ArrayList<>();
-        foodlist.add(new FoodItem("Cherry tomatoes","p000",0.89,R.drawable.cherrytomato));
+        foodlist.add(new FoodItem("Cherry tomatoes","p000",0.89, R.drawable.cherrytomato));
         foodlist.add(new FoodItem("Red cabbage","p001",0.99,R.drawable.cabbage));
         foodlist.add(new FoodItem("Shiitake mushrooms","p002",2.30,R.drawable.shiitake));
         foodlist.add(new FoodItem("Birds eye chilli","p003",2.95,R.drawable.chilli));

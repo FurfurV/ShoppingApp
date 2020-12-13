@@ -1,4 +1,4 @@
-package com.example.viktoria_cseke_assignment2;
+package com.example.viktoria_cseke_assignment2.fragments;
 
 import android.os.Bundle;
 
@@ -13,17 +13,21 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.viktoria_cseke_assignment2.FoodItem;
+import com.example.viktoria_cseke_assignment2.R;
+import com.example.viktoria_cseke_assignment2.adapters.MyRecycleViewAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MeatFragment extends Fragment {
+public class DairyFragment extends Fragment {
+
     private RecyclerView myRecycleV;
     private List<FoodItem> foodlist;
     View v;
 
-
-    public MeatFragment() {
+    public DairyFragment() {
         // Required empty public constructor
     }
 
@@ -31,7 +35,6 @@ public class MeatFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -39,15 +42,15 @@ public class MeatFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         foodlist = new ArrayList<>();
-        foodlist.add(new FoodItem("Streaky bacon","m000",2.40,R.drawable.bacon));
-        foodlist.add(new FoodItem("Chicken nuggets","m001",2.65,R.drawable.chickennuggets));
-        foodlist.add(new FoodItem("T-bone steak","m002",10.50,R.drawable.tbonesteak));
-        foodlist.add(new FoodItem("Italian sausage","m003",4.30,R.drawable.italiansausage));
-        foodlist.add(new FoodItem("Organic beef ribs","m004",12.00,R.drawable.beefrib));
-        foodlist.add(new FoodItem("Chilli chicken wings","m005",3.20,R.drawable.chilliwings));
+        foodlist.add(new FoodItem("Blue cheese","d000",3.00, R.drawable.bluecheese));
+        foodlist.add(new FoodItem("Red cheddar cheese","d001",2.00,R.drawable.cheddar));
+        foodlist.add(new FoodItem("Butter","d002",3.50,R.drawable.butter));
+        foodlist.add(new FoodItem("Greek yogurt","d003",2.59,R.drawable.greekyogurt));
+        foodlist.add(new FoodItem("Smoked scamorza","d004",3.30,R.drawable.scamorza));
+        foodlist.add(new FoodItem("Emmental cheese","d005",2.60,R.drawable.emmental));
 
-        v=inflater.inflate(R.layout.fragment_meat, container, false);
-        myRecycleV = (RecyclerView) v.findViewById(R.id.meatRecycle);
+        v= inflater.inflate(R.layout.fragment_dairy, container, false);
+        myRecycleV = (RecyclerView) v.findViewById(R.id.dairyRecycle);
         MyRecycleViewAdapter myRecycleViewAdapter = new MyRecycleViewAdapter(getContext(), foodlist);
         myRecycleV.setLayoutManager(new LinearLayoutManager(getActivity()));
         myRecycleV.setAdapter(myRecycleViewAdapter);
