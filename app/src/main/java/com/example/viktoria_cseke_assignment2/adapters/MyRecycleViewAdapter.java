@@ -58,15 +58,19 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
                 Double foodprice = food.get(position).getPrice();
                 String itemamount = String.valueOf(holder.amount.getText());
                 DbHandler dbHandler = new DbHandler(context);
-//                ArrayList<HashMap<String, String>> myfood= dbHandler.getCartbyNum(food.get(position).getCode());
-//                if(myfood.size() == 0){
-//                    System.out.println("Newly added <<<<<<<<<<<<<<<<<<<");
-//                }
 
-                dbHandler.insertCartDetails(foodname,foodcode,foodprice,itemamount);
-                Toast.makeText(v.getContext(), food.get(position).getName() +" added to cart", Toast.LENGTH_SHORT).show();
-                ArrayList<HashMap<String, String>> foods = dbHandler.getCart();
-                System.out.println(foods);
+                ArrayList<HashMap<String, String>> myfood= dbHandler.getCartbyNum(food.get(position).getCode());
+                if(myfood.size() == 0){
+                    dbHandler.insertCartDetails(foodname,foodcode,foodprice,itemamount);
+                    Toast.makeText(v.getContext(), food.get(position).getName() +" added to cart", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(v.getContext(), food.get(position).getName() +" already in the cart", Toast.LENGTH_SHORT).show();
+                    ArrayList<HashMap<String, String>> foods = dbHandler.getCart();
+                    System.out.println(foods);
+                }
+
+
             }
         });
 
