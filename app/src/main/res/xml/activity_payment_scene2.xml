@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000"
+        motion:autoTransition="animateToStart"
+        motion:motionInterpolator="cubic(0.2,0.2,0.81,0.59)">
+       <KeyFrameSet>
+       </KeyFrameSet>
+        <OnClick motion:targetId="@id/confirmpayment" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="243dp"
+            android:id="@+id/imageView"
+            motion:layout_constraintEnd_toStartOf="@+id/scrollView4" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:id="@+id/textView3"
+            motion:layout_constraintEnd_toStartOf="@id/imageView"
+            android:layout_marginEnd="400dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="90dp" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="243dp"
+            android:id="@+id/imageView"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="370dp" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:id="@+id/textView3"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="90dp" />
+    </ConstraintSet>
+    <Transition
+        motion:constraintSetStart="@+id/start"
+        motion:constraintSetEnd="@+id/end" />
+    <ConstraintSet android:id="@+id/test" />
+</MotionScene>
