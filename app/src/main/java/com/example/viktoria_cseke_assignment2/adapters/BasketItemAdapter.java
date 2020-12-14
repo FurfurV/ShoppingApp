@@ -45,14 +45,18 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
     public void onBindViewHolder(@NonNull ThisViewHolder holder, int position) {
         holder.name.setText(items.get(position).getName());
         holder.code.setText(items.get(position).getCode());
-        holder.price.setText(String.format("€ %.2f", items.get(position).getPrice()));
+        int amount = items.get(position).getItemamount();
+        double price = items.get(position).getPrice();
+
+        holder.price.setText(String.format("€ %.2f", price*amount));
+        holder.amount.setText(Integer.toString(items.get(position).getItemamount()));
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 System.out.println(">>>"+items.get(position).getName());
                 DbHandler dbHandler = new DbHandler(context);
-                dbHandler.DeleteCartItem(items.get(position).getCode());
+                dbHandler.deleteCartItem(items.get(position).getCode());
                 System.out.println("removed");
                 items.remove(position);
                 notifyItemRemoved(position);
@@ -62,6 +66,50 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
                 Basket.cost.setText(String.format("€ %.2f",updatePrice()));
 
                 updatePrice();
+
+            }
+        });
+
+        holder.increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count=Integer.parseInt(String.valueOf(holder.amount.getText()));
+                Double foodprice = items.get(position).getPrice();
+
+                count++;
+                holder.amount.setText(Integer.toString(count));
+                holder.price.setText(String.format("€ %.2f", foodprice*count));
+                items.get(position).setItemamount(count);
+                dbHandler.updateCartAmount(items.get(position).getCode(),Integer.toString(count));
+
+                double price=updatePrice();
+                Basket.cost.setText(String.format("€ %.2f",price));
+            }
+        });
+
+        holder.decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count=Integer.parseInt(String.valueOf(holder.amount.getText()));
+                Double foodprice = items.get(position).getPrice();
+                if(count == 1){
+                    holder.amount.setText("1");
+                    holder.price.setText(String.format("€ %.2f", foodprice));
+                    items.get(position).setItemamount(count);
+                    dbHandler.updateCartAmount(items.get(position).getCode(),Integer.toString(count));
+
+                    double price=updatePrice();
+                    Basket.cost.setText(String.format("€ %.2f",price));
+                }else{
+                    count-=1;
+                    holder.amount.setText(Integer.toString(count));
+                    holder.price.setText(String.format("€ %.2f", foodprice*count));
+                    items.get(position).setItemamount(count);
+                    dbHandler.updateCartAmount(items.get(position).getCode(),Integer.toString(count));
+
+                    double price=updatePrice();
+                    Basket.cost.setText(String.format("€ %.2f",price));
+                }
 
             }
         });
@@ -76,8 +124,11 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
     public double updatePrice(){
         double newPrice=0;
         for (int i =0; i<getItemCount();i++){
-            System.out.println(items.get(i).getPrice()+"prices <<<<<<<<<<<<<");
-            newPrice=newPrice+items.get(i).getPrice();
+            int amount = items.get(i).getItemamount();
+            double price = items.get(i).getPrice();
+
+            System.out.println(amount*price+"prices <<<<<<<<<<<<<");
+            newPrice=newPrice+(amount*price);
         }
         return newPrice;
     }
@@ -93,6 +144,8 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
         private TextView code;
         private TextView price;
         private ImageButton remove;
+        private ImageButton increase,decrease;
+        private TextView amount;
 
         public ThisViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -100,6 +153,9 @@ public class BasketItemAdapter extends RecyclerView.Adapter<BasketItemAdapter.Th
             code = (TextView) itemView.findViewById(R.id.basketitemcode);
             price = (TextView) itemView.findViewById(R.id.basketitemprice);
             remove = (ImageButton) itemView.findViewById(R.id.remove);
+            increase = (ImageButton)itemView.findViewById(R.id.basketincrease);
+            decrease = (ImageButton)itemView.findViewById(R.id.basketdecrease);
+            amount =(TextView) itemView.findViewById(R.id.basketitem_amount);
 
         }
 

@@ -41,12 +41,12 @@ public class ProduceFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         foodlist = new ArrayList<>();
-        foodlist.add(new FoodItem("Cherry tomatoes","p000",0.89, R.drawable.cherrytomato));
-        foodlist.add(new FoodItem("Red cabbage","p001",0.99,R.drawable.cabbage));
-        foodlist.add(new FoodItem("Shiitake mushrooms","p002",2.30,R.drawable.shiitake));
-        foodlist.add(new FoodItem("Birds eye chilli","p003",2.95,R.drawable.chilli));
-        foodlist.add(new FoodItem("Mango","p004",0.99,R.drawable.mango));
-        foodlist.add(new FoodItem("Bananas","p005",1.10,R.drawable.banana));
+        foodlist.add(new FoodItem("Cherry tomatoes","p000",0.89, R.drawable.cherrytomato,1));
+        foodlist.add(new FoodItem("Red cabbage","p001",0.99,R.drawable.cabbage,1));
+        foodlist.add(new FoodItem("Shiitake mushrooms","p002",2.30,R.drawable.shiitake,1));
+        foodlist.add(new FoodItem("Birds eye chilli","p003",2.95,R.drawable.chilli,1));
+        foodlist.add(new FoodItem("Mango","p004",0.99,R.drawable.mango,1));
+        foodlist.add(new FoodItem("Bananas","p005",1.10,R.drawable.banana,1));
 
         v= inflater.inflate(R.layout.fragment_produce, container, false);
         myRecycleV = (RecyclerView) v.findViewById(R.id.produceRecycle);

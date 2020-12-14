@@ -79,7 +79,7 @@ public class LoginFragment extends Fragment {
                 String passw = password.getText().toString();
 
                 DbHandler dbHandler = new DbHandler(getContext());
-                ArrayList<HashMap<String, String>> getuser =dbHandler.GetUserByUsername(uname);
+                ArrayList<HashMap<String, String>> getuser =dbHandler.getUserByUsername(uname);
 
 
                 System.out.println(getuser.size());

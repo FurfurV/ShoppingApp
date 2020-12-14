@@ -4,23 +4,26 @@ public class FoodItem {
     private String name;
     private String code;
     private Double price;
+    private int itemamount;
     private int image;
 
     public FoodItem(){
 
     }
 
-    public FoodItem(String name, String code, Double price) {
+    public FoodItem(String name, String code, Double price, int itemamount) {
         this.name = name;
         this.code = code;
         this.price = price;
+        this.itemamount = itemamount;
     }
 
-    public FoodItem(String name, String code, Double price, int image) {
+    public FoodItem(String name, String code, Double price, int image,int itemamount) {
         this.name = name;
         this.code = code;
         this.price = price;
         this.image = image;
+        this.itemamount = itemamount;
     }
 
     //Getter
@@ -41,6 +44,10 @@ public class FoodItem {
         return image;
     }
 
+    public int getItemamount() {
+        return itemamount;
+    }
+
     //Setter
 
 
@@ -58,5 +65,9 @@ public class FoodItem {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public void setItemamount(int itemamount) {
+        this.itemamount = itemamount;
     }
 }

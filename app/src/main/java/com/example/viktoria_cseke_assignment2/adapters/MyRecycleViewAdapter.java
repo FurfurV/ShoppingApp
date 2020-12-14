@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
         holder.code.setText(food.get(position).getCode());
         holder.price.setText(String.format("€ %.2f",food.get(position).getPrice()));
         holder.img.setImageResource(food.get(position).getImage());
+        holder.amount.setText(Integer.toString(food.get(position).getItemamount()));
 
 
         holder.addtocart.setOnClickListener(new View.OnClickListener() {
@@ -54,20 +56,47 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
                 String foodname = food.get(position).getName();
                 String foodcode = food.get(position).getCode();
                 Double foodprice = food.get(position).getPrice();
+                String itemamount = String.valueOf(holder.amount.getText());
                 DbHandler dbHandler = new DbHandler(context);
-                dbHandler.InsertCartDetails(foodname,foodcode,foodprice);
+//                ArrayList<HashMap<String, String>> myfood= dbHandler.getCartbyNum(food.get(position).getCode());
+//                if(myfood.size() == 0){
+//                    System.out.println("Newly added <<<<<<<<<<<<<<<<<<<");
+//                }
+
+                dbHandler.insertCartDetails(foodname,foodcode,foodprice,itemamount);
                 Toast.makeText(v.getContext(), food.get(position).getName() +" added to cart", Toast.LENGTH_SHORT).show();
-                ArrayList<HashMap<String, String>> foods = dbHandler.GetCart();
+                ArrayList<HashMap<String, String>> foods = dbHandler.getCart();
                 System.out.println(foods);
             }
         });
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                System.out.println(">>>>>>>>>>>>>>>>>>"+ food.get(position).getName());
-//            }
-//        });
+        holder.increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count=Integer.parseInt(String.valueOf(holder.amount.getText()));
+                Double foodprice = food.get(position).getPrice();
+                count++;
+                holder.amount.setText(Integer.toString(count));
+                holder.price.setText(String.format("€ %.2f", foodprice*count));
+            }
+        });
+
+        holder.decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count=Integer.parseInt(String.valueOf(holder.amount.getText()));
+                Double foodprice = food.get(position).getPrice();
+                if(count == 1){
+                    holder.amount.setText("1");
+                    holder.price.setText(String.format("€ %.2f", foodprice));
+                }else{
+                    count-=1;
+                    holder.amount.setText(Integer.toString(count));
+                    holder.price.setText(String.format("€ %.2f", foodprice*count));
+                }
+
+            }
+        });
     }
 
     @Override
@@ -79,9 +108,11 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
         private TextView name;
         private TextView code;
         private TextView price;
+        private TextView amount;
         private ImageView img;
         private Button addtocart;
         private FoodItem foodItem=new FoodItem();
+        private ImageButton increase,decrease;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,6 +122,9 @@ public class MyRecycleViewAdapter extends RecyclerView.Adapter<MyRecycleViewAdap
             price = (TextView) itemView.findViewById(R.id.textView_Price);
             img = (ImageView) itemView.findViewById(R.id.food_image);
             addtocart = (Button) itemView.findViewById(R.id.add_to_cart);
+            increase = (ImageButton) itemView.findViewById(R.id.increase);
+            decrease = (ImageButton) itemView.findViewById(R.id.decrease);
+            amount = (TextView) itemView.findViewById(R.id.item_amount);
 
         }
     }

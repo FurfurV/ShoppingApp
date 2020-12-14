@@ -42,12 +42,12 @@ public class DairyFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         foodlist = new ArrayList<>();
-        foodlist.add(new FoodItem("Blue cheese","d000",3.00, R.drawable.bluecheese));
-        foodlist.add(new FoodItem("Red cheddar cheese","d001",2.00,R.drawable.cheddar));
-        foodlist.add(new FoodItem("Butter","d002",3.50,R.drawable.butter));
-        foodlist.add(new FoodItem("Greek yogurt","d003",2.59,R.drawable.greekyogurt));
-        foodlist.add(new FoodItem("Smoked scamorza","d004",3.30,R.drawable.scamorza));
-        foodlist.add(new FoodItem("Emmental cheese","d005",2.60,R.drawable.emmental));
+        foodlist.add(new FoodItem("Blue cheese","d000",3.00, R.drawable.bluecheese,1));
+        foodlist.add(new FoodItem("Red cheddar cheese","d001",2.00,R.drawable.cheddar,1));
+        foodlist.add(new FoodItem("Butter","d002",3.50,R.drawable.butter,1));
+        foodlist.add(new FoodItem("Greek yogurt","d003",2.59,R.drawable.greekyogurt,1));
+        foodlist.add(new FoodItem("Smoked scamorza","d004",3.30,R.drawable.scamorza,1));
+        foodlist.add(new FoodItem("Emmental cheese","d005",2.60,R.drawable.emmental,1));
 
         v= inflater.inflate(R.layout.fragment_dairy, container, false);
         myRecycleV = (RecyclerView) v.findViewById(R.id.dairyRecycle);

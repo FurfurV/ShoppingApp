@@ -51,8 +51,8 @@ public class Basket extends AppCompatActivity {
         food= new ArrayList<>();
         dbHandler=new DbHandler(this);
         getCart = new ArrayList<>();
-        getCart.addAll(dbHandler.GetCart());
-        size = dbHandler.GetCart().size();
+        getCart.addAll(dbHandler.getCart());
+        size = dbHandler.getCart().size();
 
         emptybasket = (Button) findViewById(R.id.emptybasket);
         continueShopping = (Button) findViewById(R.id.continueshop);
@@ -64,9 +64,10 @@ public class Basket extends AppCompatActivity {
             Double price =Double.parseDouble(getCart.get(i).get("price"));
             String name = getCart.get(i).get("itemname").toString();
             String code = getCart.get(i).get("itemcode").toString();
+            int itemamount = Integer.parseInt(getCart.get(i).get("itemamount"));
             System.out.println(totalprice + price);
             totalprice= totalprice + price;
-            food.add(new FoodItem(name,code,price));
+            food.add(new FoodItem(name,code,price,itemamount));
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.basketRecycle);
@@ -83,7 +84,7 @@ public class Basket extends AppCompatActivity {
         emptybasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbHandler.DeleteCart();
+                dbHandler.deleteCart();
                 food=new ArrayList<>();
                 basketItemAdapter.notifyDataSetChanged();
                 basketItemAdapter.removeall();

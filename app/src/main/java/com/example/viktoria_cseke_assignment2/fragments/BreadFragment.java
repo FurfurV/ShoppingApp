@@ -41,12 +41,12 @@ public class BreadFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         foodlist = new ArrayList<>();
-        foodlist.add(new FoodItem("Artisan bread","b000",1.70, R.drawable.bread));
-        foodlist.add(new FoodItem("Olive bread","b001",2.00,R.drawable.olive_bread));
-        foodlist.add(new FoodItem("Tiger bread rolls","b002",1.90,R.drawable.tiger_bread_roll));
-        foodlist.add(new FoodItem("Pain au chocolat","b003",0.80,R.drawable.painauchoco));
-        foodlist.add(new FoodItem("Chocolate chip cookie","b004",0.60,R.drawable.cookies));
-        foodlist.add(new FoodItem("Tomato focaccia","b005",2.60,R.drawable.tomatofocaccia));
+        foodlist.add(new FoodItem("Artisan bread","b000",1.70, R.drawable.bread,1));
+        foodlist.add(new FoodItem("Olive bread","b001",2.00,R.drawable.olive_bread,1));
+        foodlist.add(new FoodItem("Tiger bread rolls","b002",1.90,R.drawable.tiger_bread_roll,1));
+        foodlist.add(new FoodItem("Pain au chocolat","b003",0.80,R.drawable.painauchoco,1));
+        foodlist.add(new FoodItem("Chocolate chip cookie","b004",0.60,R.drawable.cookies,1));
+        foodlist.add(new FoodItem("Tomato focaccia","b005",2.60,R.drawable.tomatofocaccia,1));
 
 
         v= inflater.inflate(R.layout.fragment_bread, container, false);

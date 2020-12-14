@@ -32,6 +32,7 @@ public class DbHandler extends SQLiteOpenHelper {
     private static final String KEY_ITEMNAME = "itemname";
     private static final String KEY_ITEMCODE = "itemcode";
     private static final String KEY_ITEMPRICE = "itemprice";
+    private static final String KEY_ITEMAMOUNT = "itemamount";
 
     public DbHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -48,8 +49,9 @@ public class DbHandler extends SQLiteOpenHelper {
     //cart table
     private static final String CREATE_TABLE_CART = "CREATE TABLE " + TABLE_CART +
             "(" + KEY_ITEMNAME + " TEXT,"
-            + KEY_ITEMCODE + " STRING PRIMARY KEY ,"
-            + KEY_ITEMPRICE + " TEXT" + ")";
+            + KEY_ITEMCODE + " STRING PRIMARY KEY,"
+            + KEY_ITEMPRICE + " TEXT,"
+            + KEY_ITEMAMOUNT + " TEXT" + ")";
 
 
     @Override
@@ -75,7 +77,7 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
     *   Creating new user
     */
-    public void InsertUserDetails(String username, String password, String address){
+    public void insertUserDetails(String username, String password, String address){
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
@@ -91,13 +93,14 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
     * create new cart
      */
-    public void InsertCartDetails(String itemname, String itemcode, Double price){
+    public void insertCartDetails(String itemname, String itemcode, Double price, String itemamount){
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
         ContentValues cValues = new ContentValues();
         cValues.put(KEY_ITEMNAME, itemname);
         cValues.put(KEY_ITEMCODE, itemcode);
         cValues.put(KEY_ITEMPRICE, price);
+        cValues.put(KEY_ITEMAMOUNT, itemamount);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(TABLE_CART,null, cValues);
 
@@ -108,7 +111,7 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
     *   get all user details
      */
-    public ArrayList<HashMap<String, String>> GetUsers() {
+    public ArrayList<HashMap<String, String>> getUsers() {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> userList = new ArrayList<>();
 
@@ -129,7 +132,7 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
      *   get user details based on id
      */
-    public ArrayList<HashMap<String, String>> GetUserByUsername(String username) {
+    public ArrayList<HashMap<String, String>> getUserByUsername(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> userList = new ArrayList<>();
 
@@ -151,7 +154,27 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
     *   get all cart details
      */
-    public ArrayList<HashMap<String, String>> GetCart() {
+    public ArrayList<HashMap<String, String>> getCartbyNum(String itemcode) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> cartList = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_CART;
+
+        Cursor cursor = db.query(TABLE_CART, new String[]{KEY_ITEMNAME, KEY_ITEMCODE, KEY_ITEMPRICE, KEY_ITEMAMOUNT},
+                KEY_ITEMCODE + "=?", new String[]{itemcode}, null, null, null, null);
+        while (cursor.moveToNext()) {
+            HashMap<String, String> cart = new HashMap<>();
+            cart.put("itemname", cursor.getString(cursor.getColumnIndex(KEY_ITEMNAME)));
+            cart.put("itemcode", cursor.getString(cursor.getColumnIndex(KEY_ITEMCODE)));
+            cart.put("price", cursor.getString(cursor.getColumnIndex(KEY_ITEMPRICE)));
+            cart.put("itemamount", cursor.getString(cursor.getColumnIndex(KEY_ITEMAMOUNT)));
+
+            cartList.add(cart);
+        }
+        return cartList;
+    }
+
+    public ArrayList<HashMap<String, String>> getCart() {
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<HashMap<String, String>> cartList = new ArrayList<>();
 
@@ -163,18 +186,16 @@ public class DbHandler extends SQLiteOpenHelper {
             cart.put("itemname", cursor.getString(cursor.getColumnIndex(KEY_ITEMNAME)));
             cart.put("itemcode", cursor.getString(cursor.getColumnIndex(KEY_ITEMCODE)));
             cart.put("price", cursor.getString(cursor.getColumnIndex(KEY_ITEMPRICE)));
-
+            cart.put("itemamount", cursor.getString(cursor.getColumnIndex(KEY_ITEMAMOUNT)));
             cartList.add(cart);
         }
         return cartList;
     }
 
-
-
     /*
     *   delete user details
      */
-    public void DeleteUser(String itemcode) {
+    public void deleteUser(String itemcode) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USERS, KEY_ID + " = ?", new String[]{String.valueOf(itemcode)});
         db.close();
@@ -184,13 +205,13 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
     *delete cart item details
      */
-    public void DeleteCartItem(String itemcode) {
+    public void deleteCartItem(String itemcode) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CART, KEY_ITEMCODE + " = ?", new String[]{itemcode});
         db.close();
     }
 
-    public void DeleteCart() {
+    public void deleteCart() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_CART,null,null);
         db.close();
@@ -199,7 +220,7 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
     *   update user details
      */
-    public int UpdateUserDetails(String username, String password, String address, int id) {
+    public int updateUserDetails(String username, String password, String address, int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cVals = new ContentValues();
         cVals.put(KEY_USERNAME, username);
@@ -212,11 +233,22 @@ public class DbHandler extends SQLiteOpenHelper {
     /*
     *   update cart
      */
-    public int UpdateCartDetails(String itemname, String itemcode, double price) {
+    public int updateCartDetails(String itemname, String itemcode, double price, String itemamount) {
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues cVals = new ContentValues();
         cVals.put(KEY_ITEMNAME, itemname);
         cVals.put(KEY_ITEMPRICE, price);
+        cVals.put(KEY_ITEMAMOUNT, itemamount);
+        int count = db.update(TABLE_CART, cVals, KEY_ITEMCODE + " = ?", new String[]{itemcode});
+        return count;
+    }
+
+    public int updateCartAmount(String itemcode, String itemamount) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cVals = new ContentValues();
+        cVals.put(KEY_ITEMAMOUNT, itemamount);
         int count = db.update(TABLE_CART, cVals, KEY_ITEMCODE + " = ?", new String[]{itemcode});
         return count;
     }

@@ -58,13 +58,13 @@ public class SignUpFragment extends Fragment {
                 String addrss = address.getText().toString();
 
                 DbHandler dbHandler = new DbHandler(getContext());
-                dbHandler.InsertUserDetails(name, pass, addrss);
+                dbHandler.insertUserDetails(name, pass, addrss);
 //                intent = new Intent(MainActivity.this, DetailsActivity.class);
 //                startActivity(intent);
                 Toast.makeText(getContext(), "Sign up successful",Toast.LENGTH_SHORT).show();
 
-                ArrayList<HashMap<String, String>> userList = dbHandler.GetUsers();
-                ArrayList<HashMap<String, String>> getuser = dbHandler.GetUserByUsername(name);
+                ArrayList<HashMap<String, String>> userList = dbHandler.getUsers();
+                ArrayList<HashMap<String, String>> getuser = dbHandler.getUserByUsername(name);
 
                 LoginFragment loginFragment = new LoginFragment();
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
