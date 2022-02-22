@@ -1,4 +1,4 @@
-# Final assignment for Programming mobile devices module 
+# Final assignment for programming mobile devices module 
 
 ![image](https://user-images.githubusercontent.com/44726497/155218126-f14b25cb-eb5d-4c37-b783-1f874f86a5a0.png)
 ![image](https://user-images.githubusercontent.com/44726497/155218702-569d70e6-1815-4a56-baac-f16d610b3c80.png)
